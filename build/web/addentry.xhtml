@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./Template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.prime.com.tr/ui"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+  <ui:define name="top">
+    <div class="header_cont">
+      <h1>Crea una nuova entry</h1>
+    </div>
+  </ui:define>
+
+  <ui:define name="content">
+    <div id="content-wrap" >
+      <div class="content_box_top" />
+      <div class="content_box">
+        <h:form id="form">
+          <p align="justify">Riempire tutti i campi, ed infine caricare il file contenente
+            i dati da analizzare. Per una corretta esecuzione, i dati all'interno del 
+            file dovranno rappresentare dei vettori riga, ed essere separati da un punto e virgola (<strong>;</strong>) 
+            come mostrato nell'esempio.</p> <br />
+          <p align="justify"> Esempio : un vettore di 5 elementi</p>
+          <code>0.1013978370<strong>;</strong>0.0997680581<strong>;</strong>0.0997845878<strong>;</strong>0.1055584121<strong>;</strong>0.1249907939</code>
+          
+          <p:growl id="messages" showDetail="true" />
+
+          <p:spacer height="20"/>
+          <h:panelGrid columns="3" id="grid">
+            <h:outputText value="Nome :"/>
+            <p:inputText id="NameInputText" required="true"
+                         requiredMessage="Enter Nome"
+                         value="#{sensore.nome}" maxlength="30"/>
+
+            <p:spacer />
+            <h:outputText value="Posizione :"/>
+            <h:selectOneMenu value="#{sensore.posizione}">  
+              <f:selectItem itemLabel="Est" itemValue="Est" />  
+              <f:selectItem itemLabel="Nord" itemValue="Nord" />  
+              <f:selectItem itemLabel="Sud-Ovest" itemValue="Zeta" />  
+            </h:selectOneMenu> 
+
+
+
+            <p:spacer />
+            <h:outputText value="Ora :"/>
+            <p:inputMask  id="OraInputText" mask="99:99:99" value="#{sensore.ora}" required="true"
+                          requiredMessage="Enter Ora" size="9" />
+            <p:spacer />
+            <h:outputText value="Campioni :" />
+            <p:inputText id="CampioniInputText" required="true"
+                         requiredMessage="Enter Campioni"
+                         value="#{sensore.campioni}"  >
+              <f:validateLongRange minimum="100" maximum="450000"  /> 
+            </p:inputText>
+
+
+            <p:spacer />     <p:spacer />              
+            <p:fileUpload fileUploadListener="#{fileUpload.upload}"
+                          allowTypes="*.in;*.txt" description="Input Text File" update="messages"/> 
+
+
+          </h:panelGrid> 
+
+          <h:panelGrid columns="2" >
+            <p:commandButton value="Aggiungi" image="ui-icon ui-icon-check" ajax="false" action="#{sensore.save}"/>
+            <p:button image="ui-icon ui-icon-close" value="Anulla" outcome="index"  />
+
+          </h:panelGrid>
+        </h:form>
+      </div>
+      <div class="content_box_bottom"></div>
+    </div>
+  </ui:define>
+
+</ui:composition>

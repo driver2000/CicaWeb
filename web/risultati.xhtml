@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  template="./Template.xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:p="http://primefaces.prime.com.tr/ui"
+  xmlns:f="http://java.sun.com/jsf/core">
+
+  <ui:define name="top">
+    <div class="header_cont">
+      <h1>Risultati</h1>
+    </div>
+  </ui:define>
+
+  <ui:define name="content">
+    <div id="content-wrap" >
+      <div class="content_box_top" />
+      <div class="content_box">
+        <h2>Segnali Separati</h2>
+        <div class="image_wrapper "><p:graphicImage  value="#{imageBean.image}" /> </div>
+
+
+      </div>
+      <a class="gototop" style="margin-right:120px" href="#top">Go to Top</a>
+      <div class="content_box_bottom"></div>
+
+      <br />
+
+      <div class="content_box_top"></div>
+      <div class="content_box">
+        <h2>Spettro</h2>
+        <div class="image_wrapper "> <p:graphicImage value="#{imageBean.spectrum}" />  </div>
+
+      </div>
+      <a class="gototop" style="margin-right:120px" href="#top">Go to Top</a>
+      <div class="content_box_bottom"></div>
+      <br />
+
+      <h:form id="form" style="padding-left:10px;">
+        <p:commandButton action="index" value="Home" ajax="false" image="ui-icon ui-icon-home"/>
+        <p:commandButton value="Dowload" ajax="false" image="ui-icon ui-icon-arrowthick-1-s"> 
+          <p:fileDownload value="#{fileDownload.file}"/>
+        </p:commandButton>
+      </h:form>
+    </div>
+  </ui:define>
+
+
+</ui:composition>
